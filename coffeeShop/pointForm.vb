@@ -1,6 +1,6 @@
 ﻿Public Class pointForm
     Dim ds As DataSet
-    Dim sql As String
+
 
     Private Sub pointForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ds = New DataSet
@@ -44,9 +44,12 @@
 
     End Sub
 
-
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+    Private Sub pointForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Me.Close()
         loginForm.Show()
+    End Sub
+
+    Private Sub btnUse_Click(sender As Object, e As EventArgs) Handles btnUse.Click
+
     End Sub
 End Class

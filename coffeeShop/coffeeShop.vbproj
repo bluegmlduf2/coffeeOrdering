@@ -72,10 +72,23 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="coffeeShopDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>coffeeShopDataSet.xsd</DependentUpon>
+    <Compile Include="costomerMngForm.Designer.vb">
+      <DependentUpon>costomerMngForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="costomerMngForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mainForm.Designer.vb">
+      <DependentUpon>mainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="orderForm.Designer.vb">
+      <DependentUpon>orderForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="orderForm.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="pointForm.Designer.vb">
       <DependentUpon>pointForm.vb</DependentUpon>
@@ -108,6 +121,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="costomerMngForm.resx">
+      <DependentUpon>costomerMngForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mainForm.resx">
+      <DependentUpon>mainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="orderForm.resx">
+      <DependentUpon>orderForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pointForm.resx">
       <DependentUpon>pointForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -122,17 +144,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="coffeeShopDataSet.xsc">
-      <DependentUpon>coffeeShopDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="coffeeShopDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>coffeeShopDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="coffeeShopDataSet.xss">
-      <DependentUpon>coffeeShopDataSet.xsd</DependentUpon>
-    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

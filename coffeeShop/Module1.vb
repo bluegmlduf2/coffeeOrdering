@@ -4,6 +4,8 @@
     Public vRight As String
     Public vPoint As Integer
 
+    Public sql As String
+
     Public Con As New OleDb.OleDbConnection
     Public DCom As New OleDb.OleDbCommand
     Public DA As New OleDb.OleDbDataAdapter

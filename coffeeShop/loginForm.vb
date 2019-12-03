@@ -36,8 +36,8 @@
         End If
 
         Try
-            sql = "Select mId,mName from member "
-            sql += "where mId=" + txtID.Text + " and mPass='" + txtPASS.Text + "'"
+            sql = "Select mLoginId,mName from member "
+            sql += "where mLoginId='" + txtID.Text + "' and mPass='" + txtPASS.Text + "'"
             DA = New OleDb.OleDbDataAdapter(sql, Con)
             DA.Fill(ds, "member")
 
@@ -79,8 +79,8 @@
         End If
 
         Try
-            sql = "Select eId,eName,pId from employee "
-            sql += "where eId=" + txtID.Text + " And ePass='" + txtPASS.Text + "'"
+            sql = "Select eLoginId,eName,pId from employee "
+            sql += "where eLoginId='" + txtID.Text + "' And ePass='" + txtPASS.Text + "'"
             DA = New OleDb.OleDbDataAdapter(sql, Con)
             DA.Fill(ds, "employee")
 
@@ -98,18 +98,16 @@
             txtID.Text = ""
             txtPASS.Text = ""
 
-            '1이면 관리자 모드 아니면 사원
-            If vRight = 1 Then
-                MsgBox("관리자 모드 로그인됨")
-                'mainPoint.show()
-            Else
-                MsgBox("일반 모드 로그인됨")
-                'mainPoint.show()
-            End If
+            mainForm.Show()
+            Me.Hide()
 
         Catch ex As Exception
             MsgBox("Error!!")
             Console.WriteLine(ex.ToString)
         End Try
+    End Sub
+
+    Private Sub loginForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Application.Exit()
     End Sub
 End Class
