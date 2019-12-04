@@ -24,8 +24,6 @@ Partial Class orderForm
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DataGridView4 = New System.Windows.Forms.DataGridView()
-        Me.cItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.rdoPayMoney = New System.Windows.Forms.RadioButton()
         Me.rdoPayCard = New System.Windows.Forms.RadioButton()
@@ -50,6 +48,10 @@ Partial Class orderForm
         Me.DataGridView3 = New System.Windows.Forms.DataGridView()
         Me.btnPay = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.cItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cOriPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -81,7 +83,7 @@ Partial Class orderForm
         Me.DataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView4.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cItemName, Me.cPrice})
+        Me.DataGridView4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cItemName, Me.cPrice, Me.cCount, Me.cOriPrice})
         Me.DataGridView4.Location = New System.Drawing.Point(6, 16)
         Me.DataGridView4.Name = "DataGridView4"
         Me.DataGridView4.ReadOnly = True
@@ -90,20 +92,6 @@ Partial Class orderForm
         Me.DataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView4.Size = New System.Drawing.Size(475, 246)
         Me.DataGridView4.TabIndex = 4
-        '
-        'cItemName
-        '
-        Me.cItemName.FillWeight = 152.2843!
-        Me.cItemName.HeaderText = "商品名"
-        Me.cItemName.Name = "cItemName"
-        Me.cItemName.ReadOnly = True
-        '
-        'cPrice
-        '
-        Me.cPrice.FillWeight = 47.71573!
-        Me.cPrice.HeaderText = "価格"
-        Me.cPrice.Name = "cPrice"
-        Me.cPrice.ReadOnly = True
         '
         'GroupBox2
         '
@@ -369,6 +357,35 @@ Partial Class orderForm
         Me.btnCancel.Text = "取り消し"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'cItemName
+        '
+        Me.cItemName.FillWeight = 152.2843!
+        Me.cItemName.HeaderText = "商品名"
+        Me.cItemName.Name = "cItemName"
+        Me.cItemName.ReadOnly = True
+        '
+        'cPrice
+        '
+        Me.cPrice.FillWeight = 94.81558!
+        Me.cPrice.HeaderText = "価格"
+        Me.cPrice.Name = "cPrice"
+        Me.cPrice.ReadOnly = True
+        '
+        'cCount
+        '
+        Me.cCount.FillWeight = 52.90017!
+        Me.cCount.HeaderText = "数量"
+        Me.cCount.Name = "cCount"
+        Me.cCount.ReadOnly = True
+        Me.cCount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'cOriPrice
+        '
+        Me.cOriPrice.HeaderText = "原価"
+        Me.cOriPrice.Name = "cOriPrice"
+        Me.cOriPrice.ReadOnly = True
+        Me.cOriPrice.Visible = False
+        '
         'orderForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
@@ -429,4 +446,6 @@ Partial Class orderForm
     Friend WithEvents rdoPayCard As RadioButton
     Friend WithEvents cItemName As DataGridViewTextBoxColumn
     Friend WithEvents cPrice As DataGridViewTextBoxColumn
+    Friend WithEvents cCount As DataGridViewTextBoxColumn
+    Friend WithEvents cOriPrice As DataGridViewTextBoxColumn
 End Class

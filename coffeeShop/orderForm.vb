@@ -63,11 +63,95 @@
 
     Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick, DataGridView3.CellDoubleClick, DataGridView2.CellDoubleClick
         Dim pName As String = sender.rows(e.RowIndex).Cells(0).value
-        Dim pPrice As String = sender.rows(e.RowIndex).Cells(1).value 'sender(0, 0).value
+        Dim pPrice As Integer = sender.rows(e.RowIndex).Cells(1).value 'sender(0, 0).value
+        Dim pCount As Integer = sender.rows(e.RowIndex).Cells(2).value
+
+        If pCount = 0 Then
+            MsgBox("在庫が足りないです")
+            Return
+        End If
+
+        For i = 1 To DataGridView4.RowCount
+            If DataGridView4("cItemName", i - 1).Value = pName Then
+
+                Dim vCount As Integer = DataGridView4.Rows(i - 1).Cells("cCount").Value
+                DataGridView4.Rows(i - 1).Cells("cCount").Value = vCount + 1
+
+                Dim vPrice As Integer = DataGridView4.Rows(i - 1).Cells("cPrice").Value + pPrice
+                DataGridView4.Rows(i - 1).Cells("cPrice").Value = vPrice
+
+                sender.rows(e.RowIndex).Cells(2).value = pCount - 1
+
+                returnAmount()
+                Return
+            End If
+        Next
 
         Dim addRow As Integer = DataGridView4.Rows.Add()
         DataGridView4("cItemName", addRow).Value = pName
         DataGridView4("cPrice", addRow).Value = pPrice
+        DataGridView4("cCount", addRow).Value = 1
+        DataGridView4("cOriPrice", addRow).Value = pPrice '나중에 되돌려줄떄 차감을 위해서 넣음
+        sender.rows(e.RowIndex).Cells(2).value = pCount - 1
 
+        returnAmount()
+    End Sub
+
+    Private Sub DataGridView4_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView4.CellMouseDoubleClick
+        Dim pName As String = sender.rows(e.RowIndex).Cells(0).value
+        Dim pPrice As Integer = sender.rows(e.RowIndex).Cells(1).value 'sender(0, 0).value
+        Dim pCount As Integer = sender.rows(e.RowIndex).Cells(2).value
+        Dim pOriPrice As Integer = sender.rows(e.RowIndex).Cells(3).value
+
+        If sender.rows(e.RowIndex).Cells(2).value = 1 Then
+            DataGridView4.Rows.Remove(DataGridView4.Rows(e.RowIndex))
+            chkVal(pName)
+            returnAmount()
+            Return
+        End If
+
+        '1번~3번 그리드에 추가 메서드 
+        chkVal(pName)
+
+        '4번그리드 제거 및 수량 변경
+        sender.rows(e.RowIndex).Cells(2).value = pCount - 1
+        sender.rows(e.RowIndex).Cells(1).value = sender.rows(e.RowIndex).Cells(1).value - pOriPrice
+        returnAmount()
+    End Sub
+
+    ''' <summary>
+    ''' 총금액 반환
+    ''' </summary>
+    Private Sub returnAmount()
+        Dim vAmount As Integer
+        For r = 1 To DataGridView4.RowCount
+            vAmount += DataGridView4.Rows(r - 1).Cells("cPrice").Value
+        Next
+        txtAmount.Text = vAmount
+
+        Dim vPoint As Integer = vAmount * 5 / 100
+        txtSavePoint.Text = vPoint
+
+    End Sub
+
+
+    Private Sub chkVal(ByVal pName As String)
+        For i = 1 To DataGridView1.RowCount
+            If DataGridView1(0, i - 1).Value = pName Then
+                DataGridView1(2, i - 1).Value = DataGridView1(2, i - 1).Value + 1
+            End If
+        Next
+
+        For i = 1 To DataGridView2.RowCount
+            If DataGridView2(0, i - 1).Value = pName Then
+                DataGridView2(2, i - 1).Value = DataGridView2(2, i - 1).Value + 1
+            End If
+        Next
+
+        For i = 1 To DataGridView3.RowCount
+            If DataGridView3(0, i - 1).Value = pName Then
+                DataGridView3(2, i - 1).Value = DataGridView3(2, i - 1).Value + 1
+            End If
+        Next
     End Sub
 End Class
