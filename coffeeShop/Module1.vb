@@ -3,6 +3,7 @@
     Public vName As String
     Public vRight As String
     Public vPoint As Integer
+    Public vPosition As String
 
     Public sql As String
 

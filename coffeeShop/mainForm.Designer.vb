@@ -37,7 +37,7 @@ Partial Class mainForm
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.顧客管理ToolStripMenuItem, Me.在庫管理ToolStripMenuItem, Me.売上管理ToolStripMenuItem, Me.積立金管理ToolStripMenuItem, Me.メニュー管理ToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1006, 28)
+        Me.MenuStrip1.Size = New System.Drawing.Size(982, 28)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -75,7 +75,7 @@ Partial Class mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1006, 535)
+        Me.ClientSize = New System.Drawing.Size(982, 553)
         Me.Controls.Add(Me.MenuStrip1)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip1

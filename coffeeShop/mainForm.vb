@@ -4,6 +4,7 @@
         orderForm.MdiParent = Me
         costomerMngForm.MdiParent = Me
         orderForm.Show()
+        Me.Text = "ようこそ　BostonCoffee[" + vPosition + "][" + vName + "]様"
     End Sub
 
     ''' <summary>
