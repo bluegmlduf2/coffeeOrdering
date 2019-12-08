@@ -34,6 +34,7 @@
         DataGridView1.Columns("payPoint").HeaderText = "積立金"
         DataGridView1.Columns("payPointAmount").HeaderText = "ポイント残高"
         DataGridView1.Columns("mName").HeaderText = "メンバー名"
+        DataGridView1.Columns("payMethod").HeaderText = "決済方法"
 
         DataGridView1.Columns("mId").Visible = False
 
@@ -82,10 +83,13 @@
         End If
 
         orderForm.txtUsedPoint.Text = txtPoint.Text
+        orderForm.vmId = ds.Tables("d_point").Rows(0).Item("mId").ToString
+        orderForm.vPayPointAmount = DataGridView1("payPointAmount", 0).Value
         orderForm.txtTotal.Text = Integer.Parse(orderForm.txtAmount.Text) - Integer.Parse(txtPoint.Text)
         Label5.Visible = False
         txtPoint.Visible = False
         btnUse.Visible = False
+
         Me.Dispose(True)
     End Sub
 End Class

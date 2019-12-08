@@ -1,8 +1,7 @@
 ﻿Public Class orderForm
     Dim ds As DataSet
-    Dim c1 As DataTable '취소버튼 눌렀을떄 초기화를 위해 데이터셋의 테이블 복사
-    Dim t1 As DataTable
-    Dim b1 As DataTable
+    Public vPayPointAmount As Integer = 0
+    Public vmId As Integer = 0
 
     ''' <summary>
     ''' 초기화
@@ -11,53 +10,59 @@
     ''' <param name="e"></param>
     Private Sub orderForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ds = New DataSet
-
         'Datasource->table->(datasource)
         'Datasource->binding->(datasource)
-
-        sql = "SELECT item_name,item_price,item_amount FROM ITEM WHERE ITEM_TYPE='coffee'"
-        DA = New OleDb.OleDbDataAdapter(Sql, Con)
+        sql = "SELECT item_name,item_price,item_amount,item_id FROM ITEM WHERE ITEM_TYPE='coffee'"
+        DA = New OleDb.OleDbDataAdapter(sql, Con)
         DA.Fill(ds, "d_item_c")
-        c1 = ds.Tables("d_item_c").Copy()
-        DataGridView1.DataSource = ds.Tables("d_item_c")
-        DataGridView1.Columns("item_name").HeaderText = "商品名"
-        DataGridView1.Columns("item_price").HeaderText = "価格"
-        DataGridView1.Columns("item_amount").HeaderText = "数量"
-        DataGridView1.RowTemplate.Height = 40
-        DataGridView1.ColumnHeadersHeight = 40
-        DataGridView1.EnableHeadersVisualStyles = False
-        DataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+        With DataGridView1
+            .DataSource = ds.Tables("d_item_c")
+            .Columns("item_name").HeaderText = "商品名"
+            .Columns("item_price").HeaderText = "価格"
+            .Columns("item_amount").HeaderText = "数量"
+            .RowTemplate.Height = 40
+            .ColumnHeadersHeight = 40
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+            .Columns("item_id").Visible = False
+        End With
 
-        sql = "SELECT item_name,item_price,item_amount FROM ITEM WHERE ITEM_TYPE='tea'"
+        sql = "SELECT item_name,item_price,item_amount,item_id FROM ITEM WHERE ITEM_TYPE='tea'"
         DA = New OleDb.OleDbDataAdapter(sql, Con)
         DA.Fill(ds, "d_item_t")
-        t1 = ds.Tables("d_item_t").Copy()
-        DataGridView2.DataSource = ds.Tables("d_item_t")
-        DataGridView2.Columns("item_name").HeaderText = "商品名"
-        DataGridView2.Columns("item_price").HeaderText = "価格"
-        DataGridView2.Columns("item_amount").HeaderText = "数量"
-        DataGridView2.RowTemplate.Height = 40
-        DataGridView2.ColumnHeadersHeight = 40
-        DataGridView2.EnableHeadersVisualStyles = False
-        DataGridView2.ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+        With DataGridView2
+            .DataSource = ds.Tables("d_item_t")
+            .Columns("item_name").HeaderText = "商品名"
+            .Columns("item_price").HeaderText = "価格"
+            .Columns("item_amount").HeaderText = "数量"
+            .RowTemplate.Height = 40
+            .ColumnHeadersHeight = 40
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+            .Columns("item_id").Visible = False
+        End With
 
-        sql = "SELECT item_name,item_price,item_amount FROM ITEM WHERE ITEM_TYPE='bread'"
+        sql = "SELECT item_name,item_price,item_amount,item_id FROM ITEM WHERE ITEM_TYPE='bread'"
         DA = New OleDb.OleDbDataAdapter(sql, Con)
         DA.Fill(ds, "d_item_b")
-        b1 = ds.Tables("d_item_b").Copy()
-        DataGridView3.DataSource = ds.Tables("d_item_b")
-        DataGridView3.Columns("item_name").HeaderText = "商品名"
-        DataGridView3.Columns("item_price").HeaderText = "価格"
-        DataGridView3.Columns("item_amount").HeaderText = "数量"
-        DataGridView3.RowTemplate.Height = 40
-        DataGridView3.ColumnHeadersHeight = 40
-        DataGridView3.EnableHeadersVisualStyles = False
-        DataGridView3.ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+        With DataGridView3
+            .DataSource = ds.Tables("d_item_b")
+            .Columns("item_name").HeaderText = "商品名"
+            .Columns("item_price").HeaderText = "価格"
+            .Columns("item_amount").HeaderText = "数量"
+            .RowTemplate.Height = 40
+            .ColumnHeadersHeight = 40
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+            .Columns("item_id").Visible = False
+        End With
 
-        DataGridView4.RowTemplate.Height = 30
-        DataGridView4.ColumnHeadersHeight = 40
-        DataGridView4.EnableHeadersVisualStyles = False
-        DataGridView4.ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+        With DataGridView4
+            .RowTemplate.Height = 30
+            .ColumnHeadersHeight = 40
+            .EnableHeadersVisualStyles = False
+            .ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
+        End With
     End Sub
 
     ''' <summary>
@@ -76,14 +81,10 @@
         Dim ctlTab As TabControl
 
         ctlTab = CType(sender, TabControl)
-
         ' ctlTab.BackColor = Color.Cornsilk
-
         g = e.Graphics
-
         sText = ctlTab.TabPages(e.Index).Text
         sizeText = g.MeasureString(sText, ctlTab.Font)
-
         iX = e.Bounds.Left + 10
         iY = e.Bounds.Top + (e.Bounds.Height - sizeText.Height) / 2
 
@@ -128,6 +129,8 @@
         DataGridView4("cCount", addRow).Value = 1
         DataGridView4("cOriPrice", addRow).Value = pPrice '나중에 되돌려줄떄 차감을 위해서 넣음
         sender.rows(e.RowIndex).Cells(2).value = pCount - 1
+        DataGridView4("cItemCd", addRow).Value = sender.rows(e.RowIndex).Cells(3).value
+        DataGridView4.Columns("cItemCd").Visible = False
 
         returnAmount()
     End Sub
@@ -241,12 +244,105 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        '  DataGridView1.Refresh()
+        ds.Clear()
+        ds = New DataSet
         DataGridView4.Rows.Clear()
 
-        DataGridView1.DataSource = c1
-        DataGridView2.DataSource = t1
-        DataGridView3.DataSource = b1
+        txtAmount.Clear()
+        txtUsedPoint.Clear()
+        txtSavePoint.Clear()
+        txtTotal.Clear()
 
+        sql = "SELECT item_name,item_price,item_amount,item_id FROM ITEM WHERE ITEM_TYPE='coffee'"
+        DA = New OleDb.OleDbDataAdapter(sql, Con)
+        DA.Fill(ds, "d_item_c")
+        DataGridView1.DataSource = ds.Tables("d_item_c")
+
+        sql = "SELECT item_name,item_price,item_amount,item_id FROM ITEM WHERE ITEM_TYPE='tea'"
+        DA = New OleDb.OleDbDataAdapter(sql, Con)
+        DA.Fill(ds, "d_item_t")
+        DataGridView2.DataSource = ds.Tables("d_item_t")
+
+        sql = "SELECT item_name,item_price,item_amount,item_id FROM ITEM WHERE ITEM_TYPE='bread'"
+        DA = New OleDb.OleDbDataAdapter(sql, Con)
+        DA.Fill(ds, "d_item_b")
+        DataGridView3.DataSource = ds.Tables("d_item_b")
+
+        vmId = 0 '포인트사용자 초기화
+        vPayPointAmount = 0 '포인트잔액 초기화
+    End Sub
+
+    ''' <summary>
+    ''' 결제버튼
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnPay_Click(sender As Object, e As EventArgs) Handles btnPay.Click
+        Dim payPointUse As Integer
+        Dim payPointAmount As Integer
+        Dim payAmount As Integer
+        Dim payPoint As Integer
+        Dim payMethod As String
+
+        If DataGridView4.RowCount = 0 Then
+            MsgBox("選択された商品がありません")
+            Return
+        End If
+
+        If rdoPayCard.Checked = True Then
+            payMethod = "카드"
+        Else
+            payMethod = "현금"
+        End If
+
+        payPointUse = txtUsedPoint.Text '사용된 포인트
+        payPoint = txtSavePoint.Text '적립한 포인트
+        payPointAmount = (vPayPointAmount - payPointUse) + payPoint '적립잔액(포인트잔액-사용금액)+적립금액
+        payAmount = txtTotal.Text '최종결재금액
+
+        Try
+            '지불내역테이블에 입력
+            sql = "insert into payment(payAmount,payPointUse,payPoint,payPointAmount,mId,payMethod) values ("
+            sql += payAmount & ","
+            sql += payPointUse & ","
+            sql += payPoint & ","
+            sql += payPointAmount & ","
+            sql += vmId & ","
+            sql += "'" + payMethod & "')"
+
+            DCom.CommandText = sql
+            DCom.ExecuteNonQuery()
+
+            '지불내역테이블에 insert된 행의 가장 마지막 값
+            sql = "SELECT TOP 1 * FROM payment ORDER BY payId DESC"
+            DA = New OleDb.OleDbDataAdapter(sql, Con)
+            DA.Fill(ds, "r_payment")
+            Dim rPayId As Integer = ds.Tables("r_payment").Rows(0).Item("payId")
+
+            '지불내역테이블 상세된 행에 추가함
+            For i = 0 To DataGridView4.RowCount - 1
+                Dim itemCd As String = DataGridView4("cItemCd", i).Value
+                Dim itemCount As String = DataGridView4("cCount", i).Value
+
+                '상품상세행에 추가
+                sql = "insert into paymentDetail(payId,item_id) values ("
+                sql += rPayId & ","
+                sql += itemCd & ")"
+                DCom.CommandText = sql
+                DCom.ExecuteNonQuery()
+
+                '상품잔고 수량 변경
+                sql = "update item set item_amount=(item_amount-" + itemCount + ") where item_id=" + itemCd
+                DCom.CommandText = sql
+                DCom.ExecuteNonQuery()
+            Next
+
+
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
+
+        MsgBox("処理されました")
+        btnCancel.PerformClick()
     End Sub
 End Class
