@@ -24,6 +24,11 @@ Partial Class orderForm
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DataGridView4 = New System.Windows.Forms.DataGridView()
+        Me.cItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cOriPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cItemCd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
@@ -46,11 +51,6 @@ Partial Class orderForm
         Me.DataGridView3 = New System.Windows.Forms.DataGridView()
         Me.btnPay = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.cItemName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cOriPrice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cItemCd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -91,6 +91,41 @@ Partial Class orderForm
         Me.DataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView4.Size = New System.Drawing.Size(416, 206)
         Me.DataGridView4.TabIndex = 4
+        '
+        'cItemName
+        '
+        Me.cItemName.FillWeight = 152.2843!
+        Me.cItemName.HeaderText = "商品名"
+        Me.cItemName.Name = "cItemName"
+        Me.cItemName.ReadOnly = True
+        '
+        'cPrice
+        '
+        Me.cPrice.FillWeight = 94.81558!
+        Me.cPrice.HeaderText = "価格"
+        Me.cPrice.Name = "cPrice"
+        Me.cPrice.ReadOnly = True
+        '
+        'cCount
+        '
+        Me.cCount.FillWeight = 52.90017!
+        Me.cCount.HeaderText = "数量"
+        Me.cCount.Name = "cCount"
+        Me.cCount.ReadOnly = True
+        Me.cCount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'cOriPrice
+        '
+        Me.cOriPrice.HeaderText = "原価"
+        Me.cOriPrice.Name = "cOriPrice"
+        Me.cOriPrice.ReadOnly = True
+        Me.cOriPrice.Visible = False
+        '
+        'cItemCd
+        '
+        Me.cItemCd.HeaderText = "item_cd"
+        Me.cItemCd.Name = "cItemCd"
+        Me.cItemCd.ReadOnly = True
         '
         'GroupBox2
         '
@@ -356,41 +391,6 @@ Partial Class orderForm
         Me.btnCancel.TabIndex = 6
         Me.btnCancel.Text = "取り消し"
         Me.btnCancel.UseVisualStyleBackColor = False
-        '
-        'cItemName
-        '
-        Me.cItemName.FillWeight = 152.2843!
-        Me.cItemName.HeaderText = "商品名"
-        Me.cItemName.Name = "cItemName"
-        Me.cItemName.ReadOnly = True
-        '
-        'cPrice
-        '
-        Me.cPrice.FillWeight = 94.81558!
-        Me.cPrice.HeaderText = "価格"
-        Me.cPrice.Name = "cPrice"
-        Me.cPrice.ReadOnly = True
-        '
-        'cCount
-        '
-        Me.cCount.FillWeight = 52.90017!
-        Me.cCount.HeaderText = "数量"
-        Me.cCount.Name = "cCount"
-        Me.cCount.ReadOnly = True
-        Me.cCount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'cOriPrice
-        '
-        Me.cOriPrice.HeaderText = "原価"
-        Me.cOriPrice.Name = "cOriPrice"
-        Me.cOriPrice.ReadOnly = True
-        Me.cOriPrice.Visible = False
-        '
-        'cItemCd
-        '
-        Me.cItemCd.HeaderText = "item_cd"
-        Me.cItemCd.Name = "cItemCd"
-        Me.cItemCd.ReadOnly = True
         '
         'orderForm
         '

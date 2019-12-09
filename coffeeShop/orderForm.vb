@@ -61,6 +61,7 @@
             .RowTemplate.Height = 30
             .ColumnHeadersHeight = 40
             .EnableHeadersVisualStyles = False
+            .Columns("cItemCd").Visible = False
             .ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
         End With
     End Sub
