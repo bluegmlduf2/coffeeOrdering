@@ -66,11 +66,11 @@ Partial Class orderForm
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.DataGridView4)
-        Me.GroupBox1.Location = New System.Drawing.Point(425, 10)
+        Me.GroupBox1.Location = New System.Drawing.Point(486, 12)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GroupBox1.Size = New System.Drawing.Size(426, 214)
+        Me.GroupBox1.Size = New System.Drawing.Size(487, 268)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
@@ -81,15 +81,17 @@ Partial Class orderForm
         Me.DataGridView4.AllowUserToResizeColumns = False
         Me.DataGridView4.AllowUserToResizeRows = False
         Me.DataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cItemName, Me.cPrice, Me.cCount, Me.cOriPrice, Me.cItemCd})
-        Me.DataGridView4.Location = New System.Drawing.Point(5, 3)
+        Me.DataGridView4.Location = New System.Drawing.Point(6, 4)
         Me.DataGridView4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DataGridView4.MultiSelect = False
         Me.DataGridView4.Name = "DataGridView4"
         Me.DataGridView4.ReadOnly = True
         Me.DataGridView4.RowHeadersVisible = False
         Me.DataGridView4.RowTemplate.Height = 27
         Me.DataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView4.Size = New System.Drawing.Size(416, 206)
+        Me.DataGridView4.Size = New System.Drawing.Size(475, 258)
         Me.DataGridView4.TabIndex = 4
         '
         'cItemName
@@ -142,38 +144,38 @@ Partial Class orderForm
         Me.GroupBox2.Controls.Add(Me.txtUsedPoint)
         Me.GroupBox2.Controls.Add(Me.txtAmount)
         Me.GroupBox2.Font = New System.Drawing.Font("굴림", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(425, 229)
+        Me.GroupBox2.Location = New System.Drawing.Point(486, 286)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GroupBox2.Size = New System.Drawing.Size(296, 174)
+        Me.GroupBox2.Size = New System.Drawing.Size(338, 218)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(5, 149)
+        Me.Label5.Location = New System.Drawing.Point(6, 186)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(53, 12)
+        Me.Label5.Size = New System.Drawing.Size(67, 15)
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "決済金額"
         '
         'txtTotal
         '
         Me.txtTotal.Font = New System.Drawing.Font("굴림", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtTotal.Location = New System.Drawing.Point(75, 145)
+        Me.txtTotal.Location = New System.Drawing.Point(86, 181)
         Me.txtTotal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtTotal.Name = "txtTotal"
-        Me.txtTotal.Size = New System.Drawing.Size(211, 21)
+        Me.txtTotal.Size = New System.Drawing.Size(241, 25)
         Me.txtTotal.TabIndex = 10
         '
         'btnSearchPoint
         '
-        Me.btnSearchPoint.Location = New System.Drawing.Point(232, 51)
+        Me.btnSearchPoint.Location = New System.Drawing.Point(265, 64)
         Me.btnSearchPoint.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearchPoint.Name = "btnSearchPoint"
-        Me.btnSearchPoint.Size = New System.Drawing.Size(54, 20)
+        Me.btnSearchPoint.Size = New System.Drawing.Size(62, 25)
         Me.btnSearchPoint.TabIndex = 4
         Me.btnSearchPoint.Text = "照会"
         Me.btnSearchPoint.UseVisualStyleBackColor = True
@@ -181,10 +183,10 @@ Partial Class orderForm
         'rdoPayMoney
         '
         Me.rdoPayMoney.AutoSize = True
-        Me.rdoPayMoney.Location = New System.Drawing.Point(178, 85)
+        Me.rdoPayMoney.Location = New System.Drawing.Point(203, 106)
         Me.rdoPayMoney.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.rdoPayMoney.Name = "rdoPayMoney"
-        Me.rdoPayMoney.Size = New System.Drawing.Size(47, 16)
+        Me.rdoPayMoney.Size = New System.Drawing.Size(58, 19)
         Me.rdoPayMoney.TabIndex = 9
         Me.rdoPayMoney.Text = "現金"
         Me.rdoPayMoney.UseVisualStyleBackColor = True
@@ -193,10 +195,10 @@ Partial Class orderForm
         '
         Me.rdoPayCard.AutoSize = True
         Me.rdoPayCard.Checked = True
-        Me.rdoPayCard.Location = New System.Drawing.Point(108, 85)
+        Me.rdoPayCard.Location = New System.Drawing.Point(123, 106)
         Me.rdoPayCard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.rdoPayCard.Name = "rdoPayCard"
-        Me.rdoPayCard.Size = New System.Drawing.Size(57, 16)
+        Me.rdoPayCard.Size = New System.Drawing.Size(70, 19)
         Me.rdoPayCard.TabIndex = 8
         Me.rdoPayCard.TabStop = True
         Me.rdoPayCard.Text = "カード"
@@ -205,62 +207,62 @@ Partial Class orderForm
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(5, 118)
+        Me.Label4.Location = New System.Drawing.Point(6, 148)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(137, 12)
+        Me.Label4.Size = New System.Drawing.Size(172, 15)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "積み立てられるポイント"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(5, 86)
+        Me.Label3.Location = New System.Drawing.Point(6, 108)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(53, 12)
+        Me.Label3.Size = New System.Drawing.Size(67, 15)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "決済方法"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(5, 55)
+        Me.Label2.Location = New System.Drawing.Point(6, 69)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(101, 12)
+        Me.Label2.Size = New System.Drawing.Size(127, 15)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "使われるポイント"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(5, 24)
+        Me.Label1.Location = New System.Drawing.Point(6, 30)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(29, 12)
+        Me.Label1.Size = New System.Drawing.Size(37, 15)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "金額"
         '
         'txtSavePoint
         '
-        Me.txtSavePoint.Location = New System.Drawing.Point(161, 114)
+        Me.txtSavePoint.Location = New System.Drawing.Point(184, 142)
         Me.txtSavePoint.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtSavePoint.Name = "txtSavePoint"
-        Me.txtSavePoint.Size = New System.Drawing.Size(126, 21)
+        Me.txtSavePoint.Size = New System.Drawing.Size(143, 25)
         Me.txtSavePoint.TabIndex = 3
         '
         'txtUsedPoint
         '
         Me.txtUsedPoint.Enabled = False
-        Me.txtUsedPoint.Location = New System.Drawing.Point(122, 51)
+        Me.txtUsedPoint.Location = New System.Drawing.Point(139, 64)
         Me.txtUsedPoint.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtUsedPoint.Name = "txtUsedPoint"
-        Me.txtUsedPoint.Size = New System.Drawing.Size(106, 21)
+        Me.txtUsedPoint.Size = New System.Drawing.Size(121, 25)
         Me.txtUsedPoint.TabIndex = 1
         '
         'txtAmount
         '
-        Me.txtAmount.Location = New System.Drawing.Point(75, 20)
+        Me.txtAmount.Location = New System.Drawing.Point(86, 25)
         Me.txtAmount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtAmount.Name = "txtAmount"
-        Me.txtAmount.Size = New System.Drawing.Size(211, 21)
+        Me.txtAmount.Size = New System.Drawing.Size(241, 25)
         Me.txtAmount.TabIndex = 0
         '
         'TabControl1
@@ -272,12 +274,12 @@ Partial Class orderForm
         Me.TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed
         Me.TabControl1.Font = New System.Drawing.Font("굴림", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(50, 100)
-        Me.TabControl1.Location = New System.Drawing.Point(10, 10)
+        Me.TabControl1.Location = New System.Drawing.Point(11, 12)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(410, 393)
+        Me.TabControl1.Size = New System.Drawing.Size(469, 491)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 4
         '
@@ -288,7 +290,7 @@ Partial Class orderForm
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TabPage1.Size = New System.Drawing.Size(302, 385)
+        Me.TabPage1.Size = New System.Drawing.Size(361, 483)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "コーヒー"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -301,14 +303,17 @@ Partial Class orderForm
         Me.DataGridView1.AllowUserToResizeRows = False
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.ColumnHeadersHeight = 8
-        Me.DataGridView1.Location = New System.Drawing.Point(5, 5)
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 6)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.Height = 27
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(304, 377)
+        Me.DataGridView1.Size = New System.Drawing.Size(347, 471)
         Me.DataGridView1.TabIndex = 1
         '
         'TabPage2
@@ -318,7 +323,7 @@ Partial Class orderForm
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TabPage2.Size = New System.Drawing.Size(302, 385)
+        Me.TabPage2.Size = New System.Drawing.Size(361, 483)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "お茶"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -330,14 +335,14 @@ Partial Class orderForm
         Me.DataGridView2.AllowUserToResizeColumns = False
         Me.DataGridView2.AllowUserToResizeRows = False
         Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView2.Location = New System.Drawing.Point(5, 5)
+        Me.DataGridView2.Location = New System.Drawing.Point(6, 6)
         Me.DataGridView2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.ReadOnly = True
         Me.DataGridView2.RowHeadersVisible = False
         Me.DataGridView2.RowTemplate.Height = 27
         Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView2.Size = New System.Drawing.Size(307, 377)
+        Me.DataGridView2.Size = New System.Drawing.Size(351, 471)
         Me.DataGridView2.TabIndex = 2
         '
         'TabPage3
@@ -347,7 +352,7 @@ Partial Class orderForm
         Me.TabPage3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TabPage3.Size = New System.Drawing.Size(302, 385)
+        Me.TabPage3.Size = New System.Drawing.Size(361, 483)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "軽食"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -359,24 +364,24 @@ Partial Class orderForm
         Me.DataGridView3.AllowUserToResizeColumns = False
         Me.DataGridView3.AllowUserToResizeRows = False
         Me.DataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView3.Location = New System.Drawing.Point(5, 5)
+        Me.DataGridView3.Location = New System.Drawing.Point(6, 6)
         Me.DataGridView3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView3.Name = "DataGridView3"
         Me.DataGridView3.ReadOnly = True
         Me.DataGridView3.RowHeadersVisible = False
         Me.DataGridView3.RowTemplate.Height = 27
         Me.DataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView3.Size = New System.Drawing.Size(307, 377)
+        Me.DataGridView3.Size = New System.Drawing.Size(351, 471)
         Me.DataGridView3.TabIndex = 3
         '
         'btnPay
         '
         Me.btnPay.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnPay.Font = New System.Drawing.Font("굴림", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.btnPay.Location = New System.Drawing.Point(726, 237)
+        Me.btnPay.Location = New System.Drawing.Point(830, 296)
         Me.btnPay.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPay.Name = "btnPay"
-        Me.btnPay.Size = New System.Drawing.Size(125, 101)
+        Me.btnPay.Size = New System.Drawing.Size(143, 126)
         Me.btnPay.TabIndex = 5
         Me.btnPay.Text = "決済"
         Me.btnPay.UseVisualStyleBackColor = False
@@ -384,19 +389,19 @@ Partial Class orderForm
         'btnCancel
         '
         Me.btnCancel.BackColor = System.Drawing.Color.Transparent
-        Me.btnCancel.Location = New System.Drawing.Point(726, 342)
+        Me.btnCancel.Location = New System.Drawing.Point(830, 428)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(125, 60)
+        Me.btnCancel.Size = New System.Drawing.Size(143, 75)
         Me.btnCancel.TabIndex = 6
         Me.btnCancel.Text = "取り消し"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
         'orderForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(862, 412)
+        Me.ClientSize = New System.Drawing.Size(985, 515)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnPay)
         Me.Controls.Add(Me.TabControl1)

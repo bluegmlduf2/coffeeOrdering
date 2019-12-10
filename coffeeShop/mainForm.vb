@@ -15,12 +15,9 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub 顧客管理ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 顧客管理ToolStripMenuItem.Click
-        orderForm.Close()
+        allFormClose()
+        costomerMngForm.MdiParent = Me
         costomerMngForm.Show()
-    End Sub
-
-    Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Application.Exit()
     End Sub
 
     Private Sub 在庫管理ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 在庫管理ToolStripMenuItem.Click
@@ -28,7 +25,18 @@
     End Sub
 
     Private Sub HOMEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HOMEToolStripMenuItem.Click
-
+        allFormClose()
+        orderForm.MdiParent = Me
         orderForm.Show()
+    End Sub
+
+    Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Application.Exit()
+    End Sub
+
+    Private Sub allFormClose()
+        For Each item As Form In Me.MdiChildren
+            item.Dispose()
+        Next
     End Sub
 End Class

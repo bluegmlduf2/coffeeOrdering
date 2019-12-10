@@ -47,15 +47,16 @@ Partial Class costomerMngForm
         Me.txtCall1 = New System.Windows.Forms.MaskedTextBox()
         Me.txtAddress1 = New System.Windows.Forms.MaskedTextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(468, 466)
+        Me.btnAdd.Location = New System.Drawing.Point(520, 466)
         Me.btnAdd.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(114, 38)
+        Me.btnAdd.Size = New System.Drawing.Size(79, 38)
         Me.btnAdd.TabIndex = 1
         Me.btnAdd.Text = "追加"
         Me.btnAdd.UseVisualStyleBackColor = True
@@ -63,20 +64,20 @@ Partial Class costomerMngForm
         'btnSave
         '
         Me.btnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnSave.Location = New System.Drawing.Point(708, 466)
+        Me.btnSave.Location = New System.Drawing.Point(775, 466)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(114, 38)
+        Me.btnSave.Size = New System.Drawing.Size(79, 38)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "SAVE"
         Me.btnSave.UseVisualStyleBackColor = False
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(588, 466)
+        Me.btnDelete.Location = New System.Drawing.Point(690, 466)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(114, 38)
+        Me.btnDelete.Size = New System.Drawing.Size(79, 38)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "削除"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -181,6 +182,7 @@ Partial Class costomerMngForm
         'txtPass
         '
         Me.txtPass.BackColor = System.Drawing.Color.Cornsilk
+        Me.txtPass.Enabled = False
         Me.txtPass.Location = New System.Drawing.Point(562, 58)
         Me.txtPass.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtPass.Name = "txtPass"
@@ -191,6 +193,7 @@ Partial Class costomerMngForm
         'txtName
         '
         Me.txtName.BackColor = System.Drawing.Color.Cornsilk
+        Me.txtName.Enabled = False
         Me.txtName.Location = New System.Drawing.Point(562, 99)
         Me.txtName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtName.Name = "txtName"
@@ -199,6 +202,7 @@ Partial Class costomerMngForm
         '
         'txtFullAddress
         '
+        Me.txtFullAddress.Enabled = False
         Me.txtFullAddress.Location = New System.Drawing.Point(562, 299)
         Me.txtFullAddress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtFullAddress.Name = "txtFullAddress"
@@ -220,6 +224,7 @@ Partial Class costomerMngForm
         '
         Me.rdoSex1.AutoSize = True
         Me.rdoSex1.Checked = True
+        Me.rdoSex1.Enabled = False
         Me.rdoSex1.Location = New System.Drawing.Point(562, 140)
         Me.rdoSex1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.rdoSex1.Name = "rdoSex1"
@@ -232,6 +237,7 @@ Partial Class costomerMngForm
         'rdoSex2
         '
         Me.rdoSex2.AutoSize = True
+        Me.rdoSex2.Enabled = False
         Me.rdoSex2.Location = New System.Drawing.Point(609, 140)
         Me.rdoSex2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.rdoSex2.Name = "rdoSex2"
@@ -242,6 +248,7 @@ Partial Class costomerMngForm
         '
         'dateReg
         '
+        Me.dateReg.Enabled = False
         Me.dateReg.Location = New System.Drawing.Point(562, 212)
         Me.dateReg.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.dateReg.Name = "dateReg"
@@ -251,6 +258,7 @@ Partial Class costomerMngForm
         '
         'txtAreaEtc
         '
+        Me.txtAreaEtc.Enabled = False
         Me.txtAreaEtc.Location = New System.Drawing.Point(562, 342)
         Me.txtAreaEtc.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtAreaEtc.Name = "txtAreaEtc"
@@ -264,8 +272,10 @@ Partial Class costomerMngForm
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
         Me.DataGridView1.AllowUserToResizeRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Location = New System.Drawing.Point(12, 11)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
@@ -277,6 +287,7 @@ Partial Class costomerMngForm
         'txtCall1
         '
         Me.txtCall1.BackColor = System.Drawing.Color.Cornsilk
+        Me.txtCall1.Enabled = False
         Me.txtCall1.Location = New System.Drawing.Point(562, 176)
         Me.txtCall1.Mask = "000-0000-0000"
         Me.txtCall1.Name = "txtCall1"
@@ -285,6 +296,7 @@ Partial Class costomerMngForm
         '
         'txtAddress1
         '
+        Me.txtAddress1.Enabled = False
         Me.txtAddress1.Location = New System.Drawing.Point(562, 258)
         Me.txtAddress1.Mask = "000-000"
         Me.txtAddress1.Name = "txtAddress1"
@@ -294,19 +306,30 @@ Partial Class costomerMngForm
         'btnCancel
         '
         Me.btnCancel.Enabled = False
-        Me.btnCancel.Location = New System.Drawing.Point(828, 466)
+        Me.btnCancel.Location = New System.Drawing.Point(860, 466)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(114, 38)
+        Me.btnCancel.Size = New System.Drawing.Size(79, 38)
         Me.btnCancel.TabIndex = 31
         Me.btnCancel.Text = "取り消し"
         Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(605, 466)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(79, 38)
+        Me.btnUpdate.TabIndex = 32
+        Me.btnUpdate.Text = "修正"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'costomerMngForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(985, 515)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.txtAddress1)
         Me.Controls.Add(Me.txtCall1)
@@ -367,4 +390,5 @@ Partial Class costomerMngForm
     Friend WithEvents txtCall1 As MaskedTextBox
     Friend WithEvents txtAddress1 As MaskedTextBox
     Friend WithEvents btnCancel As Button
+    Friend WithEvents btnUpdate As Button
 End Class

@@ -9,7 +9,7 @@
         sql = "SELECT mLoginId,mName,iif(mSex=1,'男','女')as mSex1,mPhone,mRegDate,"
         sql += "iif(ISNULL(mAddress),'',mAddress)as sAddress,"
         sql += "iif(ISNULL(mAddress1),'',mAddress1)as sAddress1,"
-        sql += "iif(ISNULL(mEtc),'',mEtc)as sEtc FROM MEMBER order by mId"
+        sql += "iif(ISNULL(mEtc),'',mEtc)as sEtc ,mId,mPass FROM MEMBER order by mId"
         DA = New OleDb.OleDbDataAdapter(sql, Con)
         DA.Fill(ds, "d_member")
 
@@ -29,15 +29,20 @@
             .Columns("sAddress").Width = 100
             .Columns("sAddress1").Width = 150
             .Columns("sEtc").Width = 200
+            .Columns("mId").Visible = False
+            .Columns("mPass").Visible = False
 
             .RowTemplate.Height = 40
             .ColumnHeadersHeight = 40
             .EnableHeadersVisualStyles = False
             .ColumnHeadersDefaultCellStyle.BackColor = Color.Cornsilk
         End With
+
+        selectFirstRow()
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        '문제점 헤더클릭 하면 에러.. 못 막겠음
         txtId.Text = DataGridView1(0, e.RowIndex).Value
         txtName.Text = DataGridView1(1, e.RowIndex).Value
         If DataGridView1(2, e.RowIndex).Value = "男" Then
@@ -50,6 +55,7 @@
         txtAddress1.Text = DataGridView1(5, e.RowIndex).Value
         txtFullAddress.Text = DataGridView1(6, e.RowIndex).Value
         txtAreaEtc.Text = DataGridView1(7, e.RowIndex).Value
+        txtPass.Text = DataGridView1(9, e.RowIndex).Value
     End Sub
 
     ''' <summary>
@@ -62,14 +68,26 @@
 
         btnChk.Enabled = True
         btnAdd.Enabled = False
+        btnUpdate.Enabled = False
         btnDelete.Enabled = False
-        'btnSave.Enabled = True
+        btnSave.Enabled = True
         btnCancel.Enabled = True
 
         DataGridView1.Enabled = False
         txtId.Enabled = True
+        txtPass.Enabled = True
+        txtName.Enabled = True
+        rdoSex1.Enabled = True
+        rdoSex2.Enabled = True
+        txtCall1.Enabled = True
+        dateReg.Enabled = True
+        txtAddress1.Enabled = True
+        txtFullAddress.Enabled = True
+        txtAreaEtc.Enabled = True
+
         txtId.Text = ""
         txtName.Text = ""
+        txtPass.Text = ""
         rdoSex1.Checked = True
         rdoSex2.Checked = False
         txtCall1.Text = ""
@@ -94,12 +112,11 @@
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         btnChk.Enabled = False
         btnAdd.Enabled = True
+        btnUpdate.Enabled = True
         btnDelete.Enabled = True
-        'btnSave.Enabled = False
+        btnSave.Enabled = False
         btnCancel.Enabled = False
 
-        DataGridView1.Enabled = True
-        txtId.Enabled = False
         txtId.Text = ""
         txtName.Text = ""
         txtPass.Text = ""
@@ -111,6 +128,17 @@
         txtFullAddress.Text = ""
         txtAreaEtc.Text = ""
 
+        DataGridView1.Enabled = True
+        txtId.Enabled = False
+        txtPass.Enabled = False
+        txtName.Enabled = False
+        rdoSex1.Enabled = False
+        rdoSex2.Enabled = False
+        txtCall1.Enabled = False
+        dateReg.Enabled = False
+        txtAddress1.Enabled = False
+        txtFullAddress.Enabled = False
+        txtAreaEtc.Enabled = False
         '행 추가 한 상태였다면 추가한 행을 삭제함
         'If chkVal = 1 Then
         '    ds.Tables("d_member").Rows.RemoveAt(DataGridView1.CurrentCell.RowIndex)
@@ -123,26 +151,43 @@
         sql = "SELECT mLoginId,mName,iif(mSex=1,'男','女')as mSex1,mPhone,mRegDate,"
         sql += "iif(ISNULL(mAddress),'',mAddress)as sAddress,"
         sql += "iif(ISNULL(mAddress1),'',mAddress1)as sAddress1,"
-        sql += "iif(ISNULL(mEtc),'',mEtc)as sEtc FROM MEMBER order by mId"
+        sql += "iif(ISNULL(mEtc),'',mEtc)as sEtc ,mId,mPass FROM MEMBER order by mId"
         DA = New OleDb.OleDbDataAdapter(sql, Con)
         DA.Fill(ds, "d_member")
         DataGridView1.DataSource = ds.Tables("d_member")
 
+        txtId.Text = DataGridView1(0, 0).Value
+        txtName.Text = DataGridView1(1, 0).Value
+        If DataGridView1(2, 0).Value = "男" Then
+            rdoSex1.Checked = True
+        Else
+            rdoSex2.Checked = True
+        End If
+
+        selectFirstRow()
+
         chkVal = 0 '0은 원래대로
     End Sub
 
+    ''' <summary>
+    ''' 저장버튼
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim vSex As Integer = 2
+        Dim repStr As String = txtCall1.Text.Replace(" ", "")
 
-        If txtId.Text = "" Or txtPass.Text = "" Or txtName.Text = "" Or txtCall1.Text = "" Then
+        If rdoSex1.Checked Then
+            vSex = 1 '남자
+        End If
+
+        If txtId.Text = "" Or txtPass.Text = "" Or txtName.Text = "" Or repStr.Length <> 13 Then
             MsgBox("全部入力してください")
             Return
         End If
 
         If chkVal = 1 Then
-            If rdoSex1.Checked Then
-                vSex = 1 '남자
-            End If
             sql = "insert into member(mLoginId,mPass,mName,mSex,mPhone,mRegDate,mEtc,mAddress,mAddress1) values ("
             sql += "'" & txtId.Text & "',"
             sql += "'" & txtPass.Text & "',"
@@ -157,6 +202,23 @@
             DCom.CommandText = sql
             DCom.ExecuteNonQuery()
             MsgBox("追加されました")
+        ElseIf chkVal = 2 Then
+            Dim rmId As Integer = DataGridView1("mId", DataGridView1.CurrentCell.RowIndex).Value
+
+            sql = "UPDATE MEMBER SET "
+            sql += "mPass='" & txtPass.Text & "',"
+            sql += "mName='" & txtName.Text & "',"
+            sql += "mSex=" & vSex & ","
+            sql += "mPhone='" & txtCall1.Text & "',"
+            sql += "mRegDate='" & dateReg.Value & "',"
+            sql += "mEtc='" & txtAreaEtc.Text & "',"
+            sql += "mAddress='" & txtAddress1.Text & "',"
+            sql += "mAddress1='" & txtFullAddress.Text & "' "
+            sql += "WHERE MID=" & rmId
+
+            DCom.CommandText = sql
+            DCom.ExecuteNonQuery()
+            MsgBox("削除しました")
         ElseIf chkVal = 5 Then
             MsgBox("ID確認お願いします")
             txtId.Focus()
@@ -180,7 +242,74 @@
                 Return
             End If
         Next
+        txtId.Enabled = False
+        btnChk.Enabled = False
+
         MsgBox("使用可能なIDです")
         chkVal = 1
+    End Sub
+
+    ''' <summary>
+    ''' 삭제버튼
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim rYN As DialogResult = MessageBox.Show("本当に削除しますか？", "確認", MessageBoxButtons.YesNo)
+        If rYN = DialogResult.No Then
+            Return
+        End If
+
+        Dim rmId As Integer = DataGridView1("mId", DataGridView1.CurrentCell.RowIndex).Value
+        sql = "DELETE FROM MEMBER WHERE MID=" & rmId
+        DCom.CommandText = sql
+        DCom.ExecuteNonQuery()
+        MsgBox("削除しました")
+
+        btnCancel.Enabled = True
+        btnCancel.PerformClick()
+    End Sub
+
+    ''' <summary>
+    ''' 수정버튼
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        chkVal = 2 '수정시 저장을 위한 변수
+
+        btnAdd.Enabled = False
+        btnUpdate.Enabled = False
+        btnDelete.Enabled = False
+        btnSave.Enabled = True
+        btnCancel.Enabled = True
+
+        DataGridView1.Enabled = False
+
+        txtPass.Enabled = True
+        txtName.Enabled = True
+        rdoSex1.Enabled = True
+        rdoSex2.Enabled = True
+        txtCall1.Enabled = True
+        dateReg.Enabled = True
+        txtAddress1.Enabled = True
+        txtFullAddress.Enabled = True
+        txtAreaEtc.Enabled = True
+    End Sub
+
+    Private Sub selectFirstRow()
+        If DataGridView1(2, 0).Value = "男" Then
+            rdoSex1.Checked = True
+        Else
+            rdoSex2.Checked = True
+        End If
+        txtId.Text = DataGridView1(0, 0).Value
+        txtName.Text = DataGridView1(1, 0).Value
+        txtCall1.Text = DataGridView1(3, 0).Value
+        dateReg.Value = DataGridView1(4, 0).Value
+        txtAddress1.Text = DataGridView1(5, 0).Value
+        txtFullAddress.Text = DataGridView1(6, 0).Value
+        txtAreaEtc.Text = DataGridView1(7, 0).Value
+        txtPass.Text = DataGridView1(9, 0).Value
     End Sub
 End Class
