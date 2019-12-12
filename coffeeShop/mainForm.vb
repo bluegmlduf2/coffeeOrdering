@@ -3,7 +3,7 @@
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         orderForm.MdiParent = Me
         costomerMngForm.MdiParent = Me
-        employeeMngForm.MdiParent = Me
+        empMngForm.MdiParent = Me
 
         orderForm.Show()
         Me.Text = "ようこそ　BostonCoffee[" + vPosition + "][" + vName + "]様"
@@ -20,8 +20,10 @@
         costomerMngForm.Show()
     End Sub
 
-    Private Sub 在庫管理ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 在庫管理ToolStripMenuItem.Click
-
+    Private Sub 職員管理ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 職員管理ToolStripMenuItem.Click
+        allFormClose()
+        empMngForm.MdiParent = Me
+        empMngForm.Show()
     End Sub
 
     Private Sub HOMEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HOMEToolStripMenuItem.Click
@@ -39,4 +41,6 @@
             item.Dispose()
         Next
     End Sub
+
+
 End Class
