@@ -218,7 +218,7 @@
 
             DCom.CommandText = sql
             DCom.ExecuteNonQuery()
-            MsgBox("削除しました")
+            MsgBox("修正しました")
         ElseIf chkVal = 5 Then
             MsgBox("ID確認お願いします")
             txtId.Focus()
@@ -286,6 +286,7 @@
 
         DataGridView1.Enabled = False
 
+        txtId.Enabled = False
         txtPass.Enabled = True
         txtName.Enabled = True
         rdoSex1.Enabled = True

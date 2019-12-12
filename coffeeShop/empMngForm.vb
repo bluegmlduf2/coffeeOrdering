@@ -6,7 +6,7 @@
         ds = New DataSet
         '1번그리드 초기화'
         sql = "SELECT eLoginId,eName,iif(eSex=1,'男','女')as eSex1,ePhone,eWorkDate,eStatus,e.pId,"
-        sql += "iif(ISNULL(eEtc),'',eEtc)as sEtc ,eId,ePass,t.pName FROM EMPLOYEE e inner join positionT t on e.pid=t.pid order by e.pId"
+        sql += "iif(ISNULL(eEtc),'',eEtc)as sEtc ,eId,ePass,t.pName FROM EMPLOYEE e inner join positionT t on e.pid=t.pid order by e.pId,e.eId"
         DA = New OleDb.OleDbDataAdapter(sql, Con)
         DA.Fill(ds, "d_employee")
 
@@ -70,7 +70,7 @@
         For i = 0 To 6
             chkBoxListStatus.SetItemChecked(i, False)
         Next
-        selectDays()
+        selectDays(e.RowIndex)
 
         txtId.Text = DataGridView1(0, e.RowIndex).Value
         txtName.Text = DataGridView1(1, e.RowIndex).Value
@@ -170,7 +170,7 @@
         ds = New DataSet
 
         sql = "SELECT eLoginId,eName,iif(eSex=1,'男','女')as eSex1,ePhone,eWorkDate,eStatus,e.pId,"
-        sql += "iif(ISNULL(eEtc),'',eEtc)as sEtc ,eId,ePass,t.pName FROM EMPLOYEE e inner join positionT t on e.pid=t.pid order by e.pId"
+        sql += "iif(ISNULL(eEtc),'',eEtc)as sEtc ,eId,ePass,t.pName FROM EMPLOYEE e inner join positionT t on e.pid=t.pid order by e.pId,e.eId"
         DA = New OleDb.OleDbDataAdapter(sql, Con)
         DA.Fill(ds, "d_employee")
         DataGridView1.DataSource = ds.Tables("d_employee")
@@ -196,21 +196,20 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim vSex As Integer = 2
         Dim repStr As String = txtCall1.Text.Replace(" ", "")
+        Dim chkedBoxVal As String = dayReturn() '체크한 요일 문자열 배열로 반환
 
         '성별
         If rdoSex1.Checked Then
             vSex = 1 '남자
         End If
 
-        '요일
-        Dim chkedBoxVal As String = dayReturn()
-
+        '유효성체크
         If txtId.Text = "" Or txtPass.Text = "" Or txtName.Text = "" Or repStr.Length <> 13 Or chkedBoxVal = "" Then
             MsgBox("全部入力してください")
             Return
         End If
 
-        If chkVal = 1 Then
+        If chkVal = 1 Then 'insert
             sql = "insert into employee(eLoginId,ePass,eName,eSex,ePhone,eWorkDate,eEtc,eStatus,pId) values ("
             sql += "'" & txtId.Text & "',"
             sql += "'" & txtPass.Text & "',"
@@ -225,24 +224,23 @@
             DCom.CommandText = sql
             DCom.ExecuteNonQuery()
             MsgBox("追加されました")
-        ElseIf chkVal = 2 Then
-            Dim rmId As Integer = DataGridView1("mId", DataGridView1.CurrentCell.RowIndex).Value
-
-            sql = "UPDATE MEMBER SET "
-            sql += "mPass='" & txtPass.Text & "',"
-            sql += "mName='" & txtName.Text & "',"
-            sql += "mSex=" & vSex & ","
-            sql += "mPhone='" & txtCall1.Text & "',"
-            sql += "mRegDate='" & dateReg.Value & "',"
-            sql += "mEtc='" & txtAreaEtc.Text & "',"
-            sql += "mAddress='" & cmbPid.Text & "',"
-            ' sql += "mAddress1='" & txtFullAddress.Text & "' "
-            sql += "WHERE MID=" & rmId
+        ElseIf chkVal = 2 Then 'update
+            Dim reId As Integer = DataGridView1("eId", DataGridView1.CurrentCell.RowIndex).Value 'update위한 변수
+            sql = "UPDATE EMPLOYEE SET "
+            sql += "ePass='" & txtPass.Text & "',"
+            sql += "eName='" & txtName.Text & "',"
+            sql += "eSex=" & vSex & ","
+            sql += "ePhone='" & txtCall1.Text & "',"
+            sql += "eWorkDate='" & dateReg.Value & "',"
+            sql += "eStatus='" & chkedBoxVal & "',"
+            sql += "eEtc='" & txtAreaEtc.Text & "',"
+            sql += "pId=" & cmbPid.SelectedValue
+            sql += " WHERE EID=" & reId
 
             DCom.CommandText = sql
             DCom.ExecuteNonQuery()
-            MsgBox("削除しました")
-        ElseIf chkVal = 5 Then
+            MsgBox("修正しました")
+        ElseIf chkVal = 5 Then 'IDcheck
             MsgBox("ID確認お願いします")
             txtId.Focus()
             Return
@@ -283,8 +281,8 @@
             Return
         End If
 
-        Dim rmId As Integer = DataGridView1("mId", DataGridView1.CurrentCell.RowIndex).Value
-        sql = "DELETE FROM MEMBER WHERE MID=" & rmId
+        Dim emId As Integer = DataGridView1("eId", DataGridView1.CurrentCell.RowIndex).Value
+        sql = "DELETE FROM EMPLOYEE WHERE EID=" & emId
         DCom.CommandText = sql
         DCom.ExecuteNonQuery()
         MsgBox("削除しました")
@@ -308,7 +306,7 @@
         btnCancel.Enabled = True
 
         DataGridView1.Enabled = False
-
+        txtId.Enabled = False
         txtPass.Enabled = True
         txtName.Enabled = True
         rdoSex1.Enabled = True
@@ -320,6 +318,9 @@
         txtAreaEtc.Enabled = True
     End Sub
 
+    ''' <summary>
+    ''' 첫행 선택
+    ''' </summary>
     Private Sub selectFirstRow()
         '성별'
         If DataGridView1(2, 0).Value = "男" Then
@@ -329,7 +330,7 @@
         End If
 
         '요일'
-        selectDays()
+        selectDays(0)
 
         txtId.Text = DataGridView1(0, 0).Value
         txtName.Text = DataGridView1(1, 0).Value
@@ -340,29 +341,37 @@
         txtPass.Text = DataGridView1(9, 0).Value
     End Sub
 
-    Private Sub selectDays()
+    ''' <summary>
+    ''' 출근요일 선택
+    ''' </summary>
+    ''' <param name="iRow"></param>
+    Private Sub selectDays(ByVal iRow As Integer)
         '출근요일'
-        Dim arr() As String = DataGridView1(5, 0).Value.ToString.Split(",")
+        Dim arr() As String = DataGridView1(5, iRow).Value.ToString.Split(",")
         For i = 0 To arr.Length - 1
             Select Case arr(i)
                 Case "月"
-                    chkBoxListStatus.SetItemChecked(i, True)
+                    chkBoxListStatus.SetItemChecked(0, True)
                 Case "火"
-                    chkBoxListStatus.SetItemChecked(i, True)
+                    chkBoxListStatus.SetItemChecked(1, True)
                 Case "水"
-                    chkBoxListStatus.SetItemChecked(i, True)
+                    chkBoxListStatus.SetItemChecked(2, True)
                 Case "木"
-                    chkBoxListStatus.SetItemChecked(i, True)
+                    chkBoxListStatus.SetItemChecked(3, True)
                 Case "金"
-                    chkBoxListStatus.SetItemChecked(i, True)
+                    chkBoxListStatus.SetItemChecked(4, True)
                 Case "土"
-                    chkBoxListStatus.SetItemChecked(i, True)
+                    chkBoxListStatus.SetItemChecked(5, True)
                 Case "日"
-                    chkBoxListStatus.SetItemChecked(i, True)
+                    chkBoxListStatus.SetItemChecked(6, True)
             End Select
         Next
     End Sub
 
+    ''' <summary>
+    ''' 출근날짜 문자열로 만들어서 줌
+    ''' </summary>
+    ''' <returns></returns>
     Private Function dayReturn() As String
         '속성과 반환의 차이.. 속성은 그냥 걔가 원래 가진 값..반환은 메서드에 매개변수를 넣고 실행해서 반환받는 값 ex)toString()
         'Dim boxChecked As Integer = 1
