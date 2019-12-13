@@ -26,20 +26,33 @@
         empMngForm.Show()
     End Sub
 
+    Private Sub 積立金管理ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 積立金管理ToolStripMenuItem.Click
+        allFormClose()
+        pointForm.vChk = False '포인트화면 전체 회원보기 
+        pointForm.MdiParent = Me
+        pointForm.Show()
+    End Sub
+
+    Private Sub メニュー管理ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles メニュー管理ToolStripMenuItem.Click
+        allFormClose()
+        itemMngForm.MdiParent = Me
+        itemMngForm.Show()
+    End Sub
+
     Private Sub HOMEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HOMEToolStripMenuItem.Click
         allFormClose()
         orderForm.MdiParent = Me
         orderForm.Show()
     End Sub
 
-    Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Application.Exit()
-    End Sub
-
     Private Sub allFormClose()
         For Each item As Form In Me.MdiChildren
             item.Dispose()
         Next
+    End Sub
+
+    Private Sub mainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Application.Exit()
     End Sub
 
 
